@@ -1,12 +1,12 @@
 const { json } = require("body-parser");
-const { Order, Product} = require("../models/order")
+const { Order, Product } = require("../models/order")
 
 
 exports.getOrderById = (req, res, next, id) => {
     Order.findById(id).populate("products.product", "name price").exec((err, order) => {
-        if(err) {
+        if (err) {
             return res.status(400).json({
-                error : "NO order found in DB....!!!!"
+                error: "NO order found in DB....!!!!"
             })
         }
         req.order = order;
@@ -16,13 +16,13 @@ exports.getOrderById = (req, res, next, id) => {
 
 
 
-exports.createOrder  = (req, res) => {
+exports.createOrder = (req, res) => {
     req.body.order.user = req.profile;
     const order = new Order(req.body.order)
     order.save((err, order) => {
-        if(err) {
+        if (err) {
             return res.status(400).json({
-                error : "Failed to save in DB.....!!!!!"
+                error: "Failed to save in DB.....!!!!!"
             })
         }
     })
@@ -31,9 +31,9 @@ exports.createOrder  = (req, res) => {
 
 exports.getAllOrders = (req, res) => {
     Order.find().populate("user", "_id name").exec((err, order) => {
-        if(err) {
+        if (err) {
             return res.status(400).json({
-                error : "No order found in DB....!!!"
+                error: "No order found in DB....!!!"
             })
         }
         res.json(order);
@@ -44,9 +44,7 @@ exports.getAllOrders = (req, res) => {
 exports.getOrderStatus = (req, res) => {
 
     res.json({
-
-        
-        name : "VISHAL THAKUR"
+        name: "VISHAL THAKUR"
     })
 }
 
