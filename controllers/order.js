@@ -43,7 +43,7 @@ exports.getAllOrders = (req, res) => {
 
 exports.getOrderStatus = (req, res) => {
 
-     res.json()
+     
 }
 
 exports.updateStatus = (req, res) => {
