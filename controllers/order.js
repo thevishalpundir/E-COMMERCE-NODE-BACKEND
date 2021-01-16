@@ -43,7 +43,11 @@ exports.getAllOrders = (req, res) => {
 
 exports.getOrderStatus = (req, res) => {
 
-     
+    res.json({
+
+        
+        name : "VISHAL THAKUR"
+    })
 }
 
 exports.updateStatus = (req, res) => {
