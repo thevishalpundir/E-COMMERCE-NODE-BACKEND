@@ -1,5 +1,6 @@
 const { json } = require("body-parser");
-const { Order, Product } = require("../models/order")
+const { body } = require("express-validator");
+const { Order, Product } = require("../models/order");
 
 
 exports.getOrderById = (req, res, next, id) => {
@@ -43,11 +44,20 @@ exports.getAllOrders = (req, res) => {
 
 exports.getOrderStatus = (req, res) => {
 
-    res.json({
-        name: "VISHAL THAKUR"
-    })
+    res.json(Order.schema.path("status").enumValues);
 }
 
 exports.updateStatus = (req, res) => {
-    res.json()
+    Order.update(
+        { _id: req.body.orderId },
+        { $set: { status: req.body, status } },
+        (err, order) => {
+            if (err) {
+                return res.status(400).json({
+                    error: "Cannot update order status...!!!!"
+                })
+            }
+            res.json(order);
+        }
+    )
 }
